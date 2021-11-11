@@ -1,0 +1,4 @@
+{
+    "environemnt": "local",
+    "urlApi": "http://localhost:3000/"
+}

@@ -1,5 +1,7 @@
 <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-  <div class="rounded overflow-hidden shadow-lg">
-    <mov-movies-list-item></mov-movies-list-item>
-  </div>
+  <ng-container *ngFor="let movie of moviesList;">
+    <div class="rounded overflow-hidden shadow-lg">
+      <mov-movies-list-item [movieData]="movie" (goToDetailEvent)="goToDetail(movie.id)"></mov-movies-list-item>
+    </div>
+  </ng-container>
 </div>

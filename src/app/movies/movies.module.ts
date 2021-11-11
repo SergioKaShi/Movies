@@ -5,17 +5,23 @@ import { MoviesDetailComponent } from './movies-detail/movies-detail.component';
 import { MoviesNewComponent } from './movies-new/movies-new.component';
 import { MoviesListItemComponent } from './components/movies-list-item/movies-list-item.component';
 import { MoviesRoutingModule } from './movies-routing.module';
+import { MoviesListService } from './services/movies-list.service';
 
 export const MOVIES_COMPONENTS = [
   MoviesListComponent, MoviesDetailComponent, MoviesNewComponent,
   MoviesListItemComponent
 ];
 
+export const MOVIES_SERVICES = [
+  MoviesListService
+]
+
 @NgModule({
   declarations: [MOVIES_COMPONENTS],
   imports: [
     CommonModule,
     MoviesRoutingModule
-  ]
+  ],
+  providers: [MOVIES_SERVICES]
 })
 export class MoviesModule { }

@@ -1,15 +1,36 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { BaseUnsubscribeComponent } from 'src/app/shared/base-unsubscribe/base-unsubscribe.component';
+import { filterNull } from 'src/app/shared/utils/filter-null.operator';
+import { MoviesListItem } from '../models';
+import { MoviesListStore } from './movies-list-store';
 
 @Component({
   selector: 'mov-movies-list',
   templateUrl: './movies-list.component.html',
-  styleUrls: ['./movies-list.component.scss']
+  styleUrls: ['./movies-list.component.scss'],
+  providers: [MoviesListStore]
 })
-export class MoviesListComponent implements OnInit {
+export class MoviesListComponent extends BaseUnsubscribeComponent implements OnInit {
 
-  constructor() { }
+  public moviesList: Array<MoviesListItem> = [];
 
-  ngOnInit(): void {
+  constructor(private store: MoviesListStore, private router: Router) {
+    super();
   }
 
+  ngOnInit(): void {
+    this.store.searchMoviesList();
+    this.subscribeMoviesList();
+  }
+
+  private subscribeMoviesList(): void {
+    this.store.getMoviesList.pipe(this.autoUnsubscribe(), filterNull()).subscribe(moviesList => {
+      this.moviesList = moviesList;
+    });
+  }
+
+  public goToDetail(id: number): void{
+    this.router.navigate(['peliculas/detalle', id]);
+  }
 }
