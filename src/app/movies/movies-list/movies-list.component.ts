@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BaseUnsubscribeComponent } from 'src/app/shared/base-unsubscribe/base-unsubscribe.component';
-import { filterNull } from 'src/app/shared/utils/filter-null.operator';
+import { filterNull } from 'src/app/core/utils/filter-null.operator';
 import { MoviesListItem } from '../models';
 import { MoviesListStore } from './movies-list-store';
 

@@ -6,9 +6,9 @@ import { AppConfig } from '../models';
     providedIn: 'root'
 })
 export class AppConfigService {
-    private config: AppConfig | undefined;
+    private config: AppConfig;
 
-    get AppConfig(): AppConfig | undefined {
+    get AppConfig(): AppConfig {
         return this.config;
     }
 

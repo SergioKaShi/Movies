@@ -8,7 +8,7 @@ import { MoviesListItem } from '../../models';
 })
 export class MoviesListItemComponent implements OnInit {
 
-  @Input() movieData: MoviesListItem = new MoviesListItem();
+  @Input() movieData: MoviesListItem;
   @Output() goToDetailEvent = new EventEmitter();
 
   constructor() { }

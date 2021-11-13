@@ -6,6 +6,8 @@ import { MoviesNewComponent } from './movies-new/movies-new.component';
 import { MoviesListItemComponent } from './components/movies-list-item/movies-list-item.component';
 import { MoviesRoutingModule } from './movies-routing.module';
 import { MoviesListService } from './services/movies-list.service';
+import { MoviesDetailService } from './services/movies-detail.service';
+import { SharedModule } from '../shared/shared.module';
 
 export const MOVIES_COMPONENTS = [
   MoviesListComponent, MoviesDetailComponent, MoviesNewComponent,
@@ -13,14 +15,15 @@ export const MOVIES_COMPONENTS = [
 ];
 
 export const MOVIES_SERVICES = [
-  MoviesListService
+  MoviesListService, MoviesDetailService
 ]
 
 @NgModule({
   declarations: [MOVIES_COMPONENTS],
   imports: [
     CommonModule,
-    MoviesRoutingModule
+    MoviesRoutingModule,
+    SharedModule
   ],
   providers: [MOVIES_SERVICES]
 })
