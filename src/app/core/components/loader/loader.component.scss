@@ -1,0 +1,37 @@
+.loading-spinner {
+    background-color: #0000002f;
+    position: fixed;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    min-height: 100vh;
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    z-index: 99;
+}
+
+.loader {
+    border-top-color: #FBBF24;
+    -webkit-animation: spinner 1.5s linear infinite;
+    animation: spinner 1.5s linear infinite;
+}
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
