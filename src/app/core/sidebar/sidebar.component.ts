@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'mov-sidebar',
@@ -7,14 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidebarComponent implements OnInit {
 
-  collapseShow = 'hidden';
+  public collapseShow = 'hidden';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() { }
 
-  toggleCollapseShow(classes: string): void {
+  public toggleCollapseShow(classes: string): void {
     this.collapseShow = classes;
   }
 
+  public goTo(go: string) {
+    this.router.navigate([go]);
+  }
 }
