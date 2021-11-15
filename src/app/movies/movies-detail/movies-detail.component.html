@@ -1,107 +1,109 @@
-<div class="container mx-auto p-10 pt-6 relative">
-  <div class="my-5 mt-0 p-5 pb-8 relative">
-    <div class="absolute left-0 top-0">
-      <button 
-        class="mr-4 p-2 pl-5 pr-5 bg-gray-400 hover:bg-gray-700 font-bold border border-gray-500 text-white text-lg rounded-lg"
-        (click)="goBack()"
-      >
-        Volver
-      </button>
+<ng-container *transloco="let t; read 'movies'">
+  <div class="container mx-auto p-10 pt-6 relative">
+    <div class="my-5 mt-0 p-5 pb-8 relative">
+      <div class="absolute left-0 top-0">
+        <button 
+          class="mr-4 p-2 pl-5 pr-5 bg-gray-400 hover:bg-gray-700 font-bold border border-gray-500 text-white text-lg rounded-lg"
+          (click)="goBack()"
+        >
+          {{t('back')}}
+        </button>
+      </div>
+    
+      <div class="absolute top-0 right-0">
+        <button 
+          class="mr-2 p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
+          (click)="editMovie()"
+        >
+          {{t('edit')}}
+        </button>
+        <button 
+          class="p-2 pl-5 pr-5 bg-red-400 hover:bg-red-700 font-bold border border-red-500 text-white text-lg rounded-lg"
+          (click)="delelteMovie()"
+        >
+          {{t('delete')}}
+        </button>
+      </div>
     </div>
   
-    <div class="absolute top-0 right-0">
-      <button 
-        class="mr-2 p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
-        (click)="editMovie()"
-      >
-        Editar
-      </button>
-      <button 
-        class="p-2 pl-5 pr-5 bg-red-400 hover:bg-red-700 font-bold border border-red-500 text-white text-lg rounded-lg"
-        (click)="delelteMovie()"
-      >
-        Eliminar
-      </button>
-    </div>
-  </div>
-
-  <div class="md:flex no-wrap md:-mx-2 ">
-    <!-- Left Side -->
-    <div class="w-full md:w-3/12 md:mx-2">
-
-      <div class="bg-gray-200 shadow-lg p-3 border-t-4 border-yellow-400">
-        <h1 class="text-gray-900 font-bold text-xl leading-8 mb-1">{{movie?.title}}</h1>
-
-        <div class="image overflow-hidden">
-          <img 
-            class="shadow-lg rounded max-w-full h-auto align-middle border-none cursor-pointer"
-            [src]="movie?.poster || '/assets/img/no-image.jpg'" 
-            [alt]="movie?.title"
-          >
-        </div>
-
-        <ul
-          class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
-          <li class="flex items-center py-3">
-            <span>Puntuación</span>
-            <span class="ml-auto">
-              <span 
-              [ngClass]="{
-                'bg-green-500' : movie?.imdbRating >= 7,
-                'bg-yellow-500' : movie?.imdbRating >= 4 && movie?.imdbRating < 7,
-                'bg-red-500' : movie?.imdbRating < 4 
-              }"
-              class="py-1 px-2 rounded text-white text-sm">{{movie?.imdbRating | number: '1.1-1'}}</span>
-            </span>
-          </li>
-          <li class="flex items-center py-3">
-            <span>Duración</span>
-            <span class="ml-auto">{{movie?.duration | time}}</span>
-          </li>
-        </ul>
-      </div>
-
-      <div class="my-4"></div>
-    </div>
-    <!-- Right Side -->
-    <div class="w-full md:w-9/12 md:mx-2 relative">
-
-      <div class="bg-gray-200 p-3 shadow-lg rounded-sm border-t-4 border-yellow-400">
-        <div class="text-gray-700">
-
-          <div class="flex flex-wrap">
-
-            <div *ngIf="movie?.actors?.length > 0" class="w-full">
-              <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
-                <div class="px-4 py-2 font-semibold">Actores</div>
-                <ng-container *ngFor="let actor of movie?.actors">
-                  <div *ngIf="actor" class="px-4 py-2 text-gray-400">
-                    {{actor.value}}
-                  </div>
-                </ng-container>
-              </div>
-            </div>
-            
-            <div *ngIf="movie?.company" class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
-              <div class="px-4 py-2 font-semibold">Estudio</div>
-              <div class="px-4 py-2 text-gray-400">{{movie.company.value}}</div>
-            </div>
-
-            <div *ngIf="movie?.genre?.length > 0" class="w-full">
-              <div class="px-4 py-2 font-semibold">Géneros</div>
-              <div class="px-4 py-2">
-                <ng-container *ngFor="let genre of movie.genre">
-                  <span class="inline-block text-gray-400 pr-3 py-1 text-sm mr-2">
-                    #{{genre}}
-                  </span>
-                </ng-container>
-              </div>
-            </div>
+    <div class="md:flex no-wrap md:-mx-2 ">
+      <!-- Left Side -->
+      <div class="w-full md:w-3/12 md:mx-2">
+  
+        <div class="bg-gray-200 shadow-lg p-3 border-t-4 border-yellow-400">
+          <h1 class="text-gray-900 font-bold text-xl leading-8 mb-1">{{movie?.title}}</h1>
+  
+          <div class="image overflow-hidden">
+            <img 
+              class="shadow-lg rounded max-w-full h-auto align-middle border-none cursor-pointer"
+              [src]="movie?.poster || '/assets/img/no-image.jpg'" 
+              [alt]="movie?.title"
+            >
           </div>
-
+  
+          <ul
+            class="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
+            <li class="flex items-center py-3">
+              <span>{{t('rating')}}</span>
+              <span class="ml-auto">
+                <span 
+                [ngClass]="{
+                  'bg-green-500' : movie?.imdbRating >= 7,
+                  'bg-yellow-500' : movie?.imdbRating >= 4 && movie?.imdbRating < 7,
+                  'bg-red-500' : movie?.imdbRating < 4 
+                }"
+                class="py-1 px-2 rounded text-white text-sm">{{movie?.imdbRating | number: '1.1-1'}}</span>
+              </span>
+            </li>
+            <li class="flex items-center py-3">
+              <span>{{t('duration')}}</span>
+              <span class="ml-auto">{{movie?.duration | time}}</span>
+            </li>
+          </ul>
         </div>
+  
+        <div class="my-4"></div>
       </div>
-
+      <!-- Right Side -->
+      <div class="w-full md:w-9/12 md:mx-2 relative">
+  
+        <div class="bg-gray-200 p-3 shadow-lg rounded-sm border-t-4 border-yellow-400">
+          <div class="text-gray-700">
+  
+            <div class="flex flex-wrap">
+  
+              <div *ngIf="movie?.actors?.length > 0" class="w-full">
+                <div class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
+                  <div class="px-4 py-2 font-semibold">{{t('actors')}}</div>
+                  <ng-container *ngFor="let actor of movie?.actors">
+                    <div *ngIf="actor" class="px-4 py-2 text-gray-400">
+                      {{actor.value}}
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+              
+              <div *ngIf="movie?.company" class="w-full md:w-1/2 lg:w-1/2 xl:w-1/2">
+                <div class="px-4 py-2 font-semibold">{{t('company')}}</div>
+                <div class="px-4 py-2 text-gray-400">{{movie.company.value}}</div>
+              </div>
+  
+              <div *ngIf="movie?.genre?.length > 0" class="w-full">
+                <div class="px-4 py-2 font-semibold">{{t('genre')}}</div>
+                <div class="px-4 py-2">
+                  <ng-container *ngFor="let genre of movie.genre">
+                    <span class="inline-block text-gray-400 pr-3 py-1 text-sm mr-2">
+                      #{{genre}}
+                    </span>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+      </div>
     </div>
   </div>
-</div>
+</ng-container>

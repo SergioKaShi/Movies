@@ -1,0 +1,18 @@
+{
+    "newMovie": "Nueva película",
+    "back": "Volver",
+    "edit": "Editar",
+    "new": "Crear",
+    "delete": "Eliminar",
+    "rating": "Puntuación",
+    "duration": "Duración",
+    "actors": "Actores",
+    "actorsHolder": "Selecciona un actor",
+    "company": "Estudio",
+    "companyHolder": "Selecciona un estudio",
+    "genre": "Géneros",
+    "title": "Título",
+    "fieldRequired": "Campo obligatrio",
+    "posterUrl": "Póster (url)",
+    "year": "Año"
+}

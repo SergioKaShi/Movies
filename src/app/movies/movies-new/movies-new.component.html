@@ -1,122 +1,124 @@
-<div class="container mx-auto my-5 pt-2 p-10">
-
-  <div class="my-5 mt-0 p-5 pb-8 relative">
-    <div class="absolute left-0 top-0">
-      <button 
-        class="p-2 pl-5 pr-5 bg-gray-400 hover:bg-gray-700 font-bold border border-gray-500 text-white text-lg rounded-lg"
-        (click)="goBack()"
-      >
-        Volver
-      </button>
+<ng-container *transloco="let t; read 'movies'">
+  <div class="container mx-auto my-5 pt-2 p-10">
+  
+    <div class="my-5 mt-0 p-5 pb-8 relative">
+      <div class="absolute left-0 top-0">
+        <button 
+          class="p-2 pl-5 pr-5 bg-gray-400 hover:bg-gray-700 font-bold border border-gray-500 text-white text-lg rounded-lg"
+          (click)="goBack()"
+        >
+          {{t('back')}}
+        </button>
+      </div>
+      <div class="absolute top-0 right-0">
+        <button 
+          class="p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
+          (click)="createNewMovie()"
+        >
+          {{ movieId ? t('edit') : t('new')}}
+        </button>
+      </div>
     </div>
-    <div class="absolute top-0 right-0">
-      <button 
-        class="p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
-        (click)="createNewMovie()"
-      >
-        Crear
-      </button>
-    </div>
+  
+    <form class="w-full" [formGroup]="newMovieForm">
+      <div class="flex flex-wrap -mx-3 mb-6">
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-input
+            formControlName="title"
+            id="titulo-new-input"
+            [label]="t('title')"
+            [placeholder]="t('title')"
+            [messageError]="t('fieldRequired')"
+            [required]="true"
+            [hasErrors]="formErrors"
+          >
+          </mov-input>
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-input
+            formControlName="poster"
+            id="poster-new-input"
+            [label]="t('posterUrl')"
+            [placeholder]="t('posterUrl')"
+          >
+          </mov-input>
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-input
+            formControlName="genreId"
+            id="genero-new-input"
+            [label]="t('genre')"
+            [placeholder]="t('genre')"
+            [showIcon]="true"
+            [items]="newMovieForm.controls.genre.value"
+            (addElementEvent)="addGenreItem($event)"
+            (removeElementEvent)="removeGenreItem($event)"
+          >
+          </mov-input>
+  
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6">
+          <mov-select
+            formControlName="actorId"
+            [label]="t('actors')"
+            [placeholder]="t('actorsHolder')"
+            [options]="actorsOptions"
+            [multiOption]="true"
+            [selectedOptions]="newMovieForm.controls.actors.value"
+            (addOptionEvent)="addActorItem($event)"
+            (removeOptionEvent)="removeActorItem($event)"
+          >
+          </mov-select>
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-select
+            formControlName="companyId"
+            id="estudio-new-select"
+            [label]="t('company')"
+            [placeholder]="t('companyHolder')"
+            [options]="companiesOptions"
+          >
+          </mov-select>
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-input
+            formControlName="year"
+            id="anyo-new-input"
+            type="number"
+            [label]="t('year')"
+            [placeholder]="t('year')"
+          >
+          </mov-input>
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-input
+            formControlName="duration"
+            id="duracion-new-input"
+            type="number"
+            [label]="t('duration')"
+            [placeholder]="t('duration')"
+          >
+          </mov-input>
+        </div>
+  
+        <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+          <mov-input
+            formControlName="imdbRating"
+            id="puntuacion-new-input"
+            type="number"
+            [label]="t('rating')"
+            [placeholder]="t('rating')"
+          >
+          </mov-input>
+        </div>
+      </div>
+    </form>
   </div>
-
-  <form class="w-full" [formGroup]="newMovieForm">
-    <div class="flex flex-wrap -mx-3 mb-6">
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-input
-          formControlName="title"
-          label="Título"
-          id="titulo-new-input"
-          placeholder="Título"
-          messageError="Campo obligatorio"
-          [required]="true"
-          [hasErrors]="formErrors"
-        >
-        </mov-input>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-input
-          formControlName="poster"
-          label="Póster (url)"
-          id="poster-new-input"
-          placeholder="Póster (url)"
-        >
-        </mov-input>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-input
-          formControlName="genreId"
-          label="Géneros"
-          id="genero-new-input"
-          placeholder="Géneros"
-          [showIcon]="true"
-          [items]="newMovieForm.controls.genre.value"
-          (addElementEvent)="addGenreItem($event)"
-          (removeElementEvent)="removeGenreItem($event)"
-        >
-        </mov-input>
-
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6">
-        <mov-select
-          formControlName="actorId"
-          label="Actores"
-          placeholder="Selecciona un actor"
-          [options]="actorsOptions"
-          [multiOption]="true"
-          [selectedOptions]="newMovieForm.controls.actors.value"
-          (addOptionEvent)="addActorItem($event)"
-          (removeOptionEvent)="removeActorItem($event)"
-        >
-        </mov-select>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-select
-          formControlName="companyId"
-          label="Estudio"
-          id="estudio-new-select"
-          placeholder="Selecciona un estudio"
-          [options]="companiesOptions"
-        >
-        </mov-select>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-input
-          formControlName="year"
-          label="Año"
-          id="anyo-new-input"
-          placeholder="Año"
-          type="number"
-        >
-        </mov-input>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-input
-          formControlName="duration"
-          label="Duración"
-          id="duracion-new-input"
-          placeholder="Duración"
-          type="number"
-        >
-        </mov-input>
-      </div>
-
-      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-        <mov-input
-          formControlName="imdbRating"
-          label="Puntuación"
-          id="puntuacion-new-input"
-          placeholder="Puntuación"
-          type="number"
-        >
-        </mov-input>
-      </div>
-    </div>
-  </form>
-</div>
+</ng-container>

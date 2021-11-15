@@ -1,17 +1,19 @@
-<footer id="footer" class="block py-4">
-  <div class="container mx-auto px-4">
-    <hr class="mb-4 border-b-1 border-gray-400" />
-    <div class="flex flex-wrap items-center md:justify-between justify-center">
-      <div class="w-full md:w-4/12 px-4">
-        <div class="text-sm text-blueGray-500 font-semibold py-1">
-          Copyright ©
-          <a href="https://github.com/SergioKaShi" target="_blank"
-            class="text-blueGray-500 text-sm font-semibold py-1"
-          >
-            Created by Sergio
-          </a>
+<ng-container *transloco="let t;">
+  <footer id="footer" class="block py-4">
+    <div class="container mx-auto px-4">
+      <hr class="mb-4 border-b-1 border-gray-400" />
+      <div class="flex flex-wrap items-center md:justify-between justify-center">
+        <div class="w-full md:w-4/12 px-4">
+          <div class="text-sm text-blueGray-500 font-semibold py-1">
+            {{t('copyright')}}
+            <a href="https://github.com/SergioKaShi" target="_blank"
+              class="text-blueGray-500 text-sm font-semibold py-1 ml-2"
+            >
+              {{t('createdBy')}}
+            </a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
+</ng-container>

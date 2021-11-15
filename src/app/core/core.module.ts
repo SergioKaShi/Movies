@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { LoaderComponent } from './components/loader/loader.component';
+import { TranslocoModule } from '@ngneat/transloco';
 
 export const CORE_COMPONENTES = [FooterComponent, SidebarComponent, LoaderComponent];
 
@@ -11,7 +12,8 @@ export const CORE_COMPONENTES = [FooterComponent, SidebarComponent, LoaderCompon
     CORE_COMPONENTES
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TranslocoModule
   ],
   exports: [CORE_COMPONENTES]
 })

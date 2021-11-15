@@ -10,6 +10,7 @@ import { MoviesDetailService } from './services/movies-detail.service';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MoviesNewService } from './services/movies-new.service';
+import { TranslocoModule, TRANSLOCO_SCOPE } from '@ngneat/transloco';
 
 export const MOVIES_COMPONENTS = [
   MoviesListComponent, MoviesDetailComponent, MoviesNewComponent,
@@ -27,8 +28,12 @@ export const MOVIES_SERVICES = [
     FormsModule,
     ReactiveFormsModule,
     MoviesRoutingModule,
-    SharedModule
+    SharedModule,
+    TranslocoModule
   ],
-  providers: [MOVIES_SERVICES]
+  providers: [
+    ...MOVIES_SERVICES,
+    { provide: TRANSLOCO_SCOPE, useValue: 'movies' }
+  ]
 })
 export class MoviesModule { }
