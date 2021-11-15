@@ -20,6 +20,8 @@ export class MovInputComponent extends ControlValueAccessorConnector implements 
   @Input() icon: string = 'fas fa-plus';
   @Input() items: Array<string> = [];
   @Input() required: boolean = false;
+  @Input() hasErrors: boolean = false;
+  @Input() messageError: string = 'Campo inválido'
   @Output() addElementEvent: EventEmitter<string> = new EventEmitter();
   @Output() removeElementEvent: EventEmitter<string> = new EventEmitter();
 

@@ -1,6 +1,17 @@
-<div class="container mx-auto my-5 p-5">
+<div class="container mx-auto my-5 pt-2 p-10">
+
+  <div class="my-5 mt-0 p-5 pb-8 relative">
+    <div class="absolute top-0 right-0">
+      <button 
+        class="p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
+        (click)="createNewMovie()"
+      >
+        Crear
+      </button>
+    </div>
+  </div>
+
   <form class="w-full" [formGroup]="newMovieForm">
-    <button type="button" (click)="createNewMovie()">Crear nueva película</button>
     <div class="flex flex-wrap -mx-3 mb-6">
 
       <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -9,7 +20,9 @@
           label="Título"
           id="titulo-new-input"
           placeholder="Título"
+          messageError="Campo obligatorio"
           [required]="true"
+          [hasErrors]="formErrors"
         >
         </mov-input>
       </div>

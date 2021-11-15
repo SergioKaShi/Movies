@@ -21,6 +21,7 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   public companiesOptions: Array<IdValue>;
   public movieId: number;
   public editMode: boolean = false;
+  public formErrors: boolean = false;
 
   constructor(private fb: FormBuilder, private store: MoviesNewStore, private route: ActivatedRoute) {
     super();
@@ -36,6 +37,7 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
     this.subscribeMovie();
     this.subscribeActorsOptions();
     this.subscribeCompaniesOptions();
+    this.subscribeTitleValue();
     this.subscribeCompanyIdValue();
   }
 
@@ -79,6 +81,12 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   private subscribeCompaniesOptions(): void {
     this.store.getCompaniesOptions.pipe(this.autoUnsubscribe()).subscribe((companiesOptions) => {
       this.companiesOptions = [...companiesOptions];
+    });
+  }
+
+  private subscribeTitleValue(): void {
+    this.newMovieForm.controls.title.valueChanges.pipe(filterNull()).subscribe(data => {
+      this.formErrors = false;
     });
   }
 
@@ -126,7 +134,11 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   }
 
   public createNewMovie(): void {
-    this.store.createMovie({ movie: this.newMovieForm.getRawValue() });
+    this.formErrors = this.newMovieForm.invalid;
+
+    if (this.newMovieForm.valid) {
+      this.store.createMovie({ movie: this.newMovieForm.getRawValue() });
+    }
   }
 
 }
