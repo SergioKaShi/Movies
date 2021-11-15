@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable } from 'rxjs';
 import { switchMap, tap, catchError } from 'rxjs/operators';
@@ -16,7 +17,7 @@ const DEFAULT_STATE: MoviesDetailState = {
 @Injectable()
 export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
 
-  constructor(private moviesDetailService: MoviesDetailService) {
+  constructor(private moviesDetailService: MoviesDetailService, private router: Router) {
     super(DEFAULT_STATE);
   }
 
@@ -29,6 +30,19 @@ export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
         tap(movie => this.setMovieDetail(movie)),
         catchError(error => {
           tap(() => this.setMovieDetail(null));
+          return EMPTY;
+        })
+      ))
+    )
+  });
+
+  readonly deleteMovie = this.effect(($data: Observable<{ id: number }>) => {
+    return $data.pipe(
+      switchMap(({ id }) => this.moviesDetailService.deleteMovie(id).pipe(
+        tap(data => {
+          this.router.navigate(['peliculas']);
+        }),
+        catchError(error => {
           return EMPTY;
         })
       ))

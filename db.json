@@ -168,33 +168,6 @@
         9,
         11
       ]
-    },
-    {
-      "id": 11,
-      "title": "titulo",
-      "poster": null,
-      "genre": [
-        "gen1"
-      ],
-      "year": "2000",
-      "duration": "120",
-      "imdbRating": "5.8",
-      "actors": [
-        {
-          "id": 1,
-          "value": "Isaak McQuode",
-          "selected": true
-        },
-        {
-          "id": 2,
-          "value": "Rory Chanders",
-          "selected": true
-        }
-      ],
-      "company": {
-        "id": 1,
-        "value": "Jacobson-Dickinson"
-      }
     }
   ],
   "actors": [

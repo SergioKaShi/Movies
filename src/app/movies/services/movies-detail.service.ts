@@ -39,4 +39,10 @@ export class MoviesDetailService {
             })
         );
     }
+
+    deleteMovie(id: number): Observable<boolean> {
+        const url = `${this.url}movies/${id}`;
+
+        return this.httpClient.delete<any>(url).pipe(map(data => true));
+    }
 }
