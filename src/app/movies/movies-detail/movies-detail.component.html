@@ -2,14 +2,20 @@
   <div class="my-5 mt-0 p-5 pb-8 relative">
     <div class="absolute left-0 top-0">
       <button 
-        class="p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
-        (click)="editMovie()"
+        class="mr-4 p-2 pl-5 pr-5 bg-gray-400 hover:bg-gray-700 font-bold border border-gray-500 text-white text-lg rounded-lg"
+        (click)="goBack()"
       >
-        Editar
+        Volver
       </button>
     </div>
   
     <div class="absolute top-0 right-0">
+      <button 
+        class="mr-2 p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
+        (click)="editMovie()"
+      >
+        Editar
+      </button>
       <button 
         class="p-2 pl-5 pr-5 bg-red-400 hover:bg-red-700 font-bold border border-red-500 text-white text-lg rounded-lg"
         (click)="delelteMovie()"
@@ -58,7 +64,7 @@
       <div class="my-4"></div>
     </div>
     <!-- Right Side -->
-    <div class="w-full md:w-9/12 mx-2 h-64 relative">
+    <div class="w-full md:w-9/12 md:mx-2 relative">
 
       <div class="bg-gray-200 p-3 shadow-lg rounded-sm border-t-4 border-yellow-400">
         <div class="text-gray-700">

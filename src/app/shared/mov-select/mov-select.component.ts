@@ -36,7 +36,9 @@ export class MovSelectComponent extends ControlValueAccessorConnector implements
   }
 
   public addOption(option: IdValue): void {
-    this.addOptionEvent.emit({ ...option, selected: true });
+    if(!this.selectedOptions.find(op => op.id === option.id)){
+      this.addOptionEvent.emit({ ...option, selected: true });
+    }
   }
 
   public removeOption(option: IdValue): void {

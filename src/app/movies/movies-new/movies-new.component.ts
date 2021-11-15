@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IdValue } from 'src/app/models';
 import { BaseUnsubscribeComponent } from '../../shared/base-unsubscribe/base-unsubscribe.component';
 import { MoviesNewStore } from './movies-new-store';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { filterNull } from '../../core/utils/filter-null.operator';
 import { MovieDataForm } from '../models/movie-data-form';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'mov-movies-new',
@@ -23,7 +25,9 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   public editMode: boolean = false;
   public formErrors: boolean = false;
 
-  constructor(private fb: FormBuilder, private store: MoviesNewStore, private route: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private store: MoviesNewStore,
+    private route: ActivatedRoute, private router: Router
+  ) {
     super();
     this.newMovieForm = this.createForm();
     this.route.params.subscribe(params => {
@@ -73,8 +77,15 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   }
 
   private subscribeActorsOptions(): void {
-    this.store.getActorsOptions.pipe(this.autoUnsubscribe()).subscribe((actorsOptions) => {
-      this.actorsOptions = [...actorsOptions];
+    const movie = this.store.getMovie.pipe(this.autoUnsubscribe(), filterNull());
+    const actors = this.store.getActorsOptions.pipe(this.autoUnsubscribe());
+
+    combineLatest([movie, actors]).subscribe(([movie, actorsOptions]) => {
+      this.actorsOptions = [
+        ...actorsOptions.map((actor: IdValue) =>
+          ({ ...actor, selected: movie?.actors.find((ac: IdValue) => ac.id === actor.id) ? true : false })
+        )
+      ];
     });
   }
 
@@ -139,6 +150,11 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
     if (this.newMovieForm.valid) {
       this.store.createMovie({ movie: this.newMovieForm.getRawValue() });
     }
+  }
+
+  public goBack(): void {
+    const dataUrlBack = this.movieId ? ['peliculas/detalle', this.movieId] : ['/peliculas'];
+    this.router.navigate(dataUrlBack);
   }
 
 }

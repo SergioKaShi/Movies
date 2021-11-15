@@ -8,17 +8,22 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent implements OnInit {
 
-  public collapseShow = 'hidden';
+  public collapseShow = false;
+  public collapseShowClasses = 'hidden';
 
   constructor(private router: Router) { }
 
   ngOnInit() { }
 
   public toggleCollapseShow(classes: string): void {
-    this.collapseShow = classes;
+    this.collapseShow = !this.collapseShow;
+    this.collapseShowClasses = classes;
   }
 
   public goTo(go: string) {
+    if (this.collapseShow) {
+      this.toggleCollapseShow('hidden');
+    }
     this.router.navigate([go]);
   }
 }

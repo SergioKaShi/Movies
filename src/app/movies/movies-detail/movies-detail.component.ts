@@ -40,4 +40,8 @@ export class MoviesDetailComponent extends BaseUnsubscribeComponent implements O
   public delelteMovie(): void {
     this.store.deleteMovie({ id: this.id });
   }
+
+  public goBack(): void {
+    this.router.navigate(['/peliculas'])
+  }
 }
