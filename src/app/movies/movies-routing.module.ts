@@ -8,6 +8,7 @@ import { MoviesNewComponent } from './movies-new/movies-new.component';
 const routes: Routes = [
   { path: '', component: MoviesListComponent },
   { path: 'nueva', component: MoviesNewComponent },
+  { path: 'editar/:id', component: MoviesNewComponent },
   { path: 'detalle/:id', component: MoviesDetailComponent }
 ];
 

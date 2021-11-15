@@ -1,0 +1,28 @@
+.text-disabled {
+    color: #9ca3af;
+}
+
+.svg-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+    fill: #333;
+}
+
+.svg-icon circle {
+    stroke: #4691f6;
+    stroke-width: 1;
+}
+
+.pb-035 {
+    padding-bottom: 0.35rem;
+}
+
+.required:after {
+    content: " *";
+    color: #374151;
+}

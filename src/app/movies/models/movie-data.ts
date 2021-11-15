@@ -1,6 +1,4 @@
 import { IdValue } from "src/app/models";
-import { MovieActorData } from "./movie-actor-data";
-
 export class MovieData {
     id: number;
     title: string;
@@ -9,7 +7,7 @@ export class MovieData {
     year: number;
     duration: number;
     imdbRating: number;
-    actors: Array<MovieActorData>;
+    actors: Array<IdValue>;
     company: IdValue;
 
     constructor(item?: any){

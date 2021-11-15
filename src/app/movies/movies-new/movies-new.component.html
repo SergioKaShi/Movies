@@ -1,1 +1,101 @@
-<p>movies-new works!</p>
+<div class="container mx-auto my-5 p-5">
+  <form class="w-full" [formGroup]="newMovieForm">
+    <button type="button" (click)="createNewMovie()">Crear nueva película</button>
+    <div class="flex flex-wrap -mx-3 mb-6">
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-input
+          formControlName="title"
+          label="Título"
+          id="titulo-new-input"
+          placeholder="Título"
+          [required]="true"
+        >
+        </mov-input>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-input
+          formControlName="poster"
+          label="Póster (url)"
+          id="poster-new-input"
+          placeholder="Póster (url)"
+        >
+        </mov-input>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-input
+          formControlName="genreId"
+          label="Géneros"
+          id="genero-new-input"
+          placeholder="Géneros"
+          [showIcon]="true"
+          [items]="newMovieForm.controls.genre.value"
+          (addElementEvent)="addGenreItem($event)"
+          (removeElementEvent)="removeGenreItem($event)"
+        >
+        </mov-input>
+
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6">
+        <mov-select
+          formControlName="actorId"
+          label="Actores"
+          placeholder="Selecciona un actor"
+          [options]="actorsOptions"
+          [multiOption]="true"
+          [selectedOptions]="newMovieForm.controls.actors.value"
+          (addOptionEvent)="addActorItem($event)"
+          (removeOptionEvent)="removeActorItem($event)"
+        >
+        </mov-select>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-select
+          formControlName="companyId"
+          label="Estudio"
+          id="estudio-new-select"
+          placeholder="Selecciona un estudio"
+          [options]="companiesOptions"
+        >
+        </mov-select>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-input
+          formControlName="year"
+          label="Año"
+          id="anyo-new-input"
+          placeholder="Año"
+          type="number"
+        >
+        </mov-input>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-input
+          formControlName="duration"
+          label="Duración"
+          id="duracion-new-input"
+          placeholder="Duración"
+          type="number"
+        >
+        </mov-input>
+      </div>
+
+      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+        <mov-input
+          formControlName="imdbRating"
+          label="Puntuación"
+          id="puntuacion-new-input"
+          placeholder="Puntuación"
+          type="number"
+        >
+        </mov-input>
+      </div>
+    </div>
+  </form>
+</div>

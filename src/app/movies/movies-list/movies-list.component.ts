@@ -24,13 +24,17 @@ export class MoviesListComponent extends BaseUnsubscribeComponent implements OnI
     this.subscribeMoviesList();
   }
 
+  public goToAddMovie(): void {
+    this.router.navigate(['peliculas/nueva']);
+  }
+
   private subscribeMoviesList(): void {
     this.store.getMoviesList.pipe(this.autoUnsubscribe(), filterNull()).subscribe(moviesList => {
       this.moviesList = moviesList;
     });
   }
 
-  public goToDetail(id: number): void{
+  public goToDetail(id: number): void {
     this.router.navigate(['peliculas/detalle', id]);
   }
 }

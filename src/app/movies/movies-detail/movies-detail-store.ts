@@ -37,12 +37,7 @@ export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
   //#endregion
 
   //#region UPDATERS
-  readonly setMovieDetail = this.updater((state, movie: MovieData) => {
-    return {
-      ...state,
-      movie: { ...movie }
-    }
-  });
+  readonly setMovieDetail = this.updater((state, movie: MovieData) => ({ ...state, movie: { ...movie } }));
   //#endregion
 }
 

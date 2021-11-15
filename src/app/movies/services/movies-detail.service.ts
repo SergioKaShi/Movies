@@ -4,7 +4,6 @@ import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { AppConfigService } from 'src/app/security-services/app-config.service';
 import { MovieData } from '../models';
-import { MovieActorData } from '../models/movie-actor-data';
 import { IdValue } from '../../models/id-value';
 
 
@@ -30,9 +29,10 @@ export class MoviesDetailService {
 
                 return new MovieData({
                     ...movie,
-                    actors: movie.actors.map((actorId: number) => {
+                    actors: movie.actors.map((data: any) => {
+                        const actorId = data?.id || data;
                         const actorFound = actors.find((actor: any) => actor.id === actorId);
-                        return actorFound ? new MovieActorData(actorFound) : null
+                        return actorFound ? new IdValue({ ...actorFound, value: `${actorFound.first_name} ${actorFound.last_name}` }) : null
                     }),
                     company: companyFound ? new IdValue({ id: companyFound.id, value: companyFound.name }) : null
                 });

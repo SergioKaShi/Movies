@@ -8,6 +8,8 @@ import { MoviesRoutingModule } from './movies-routing.module';
 import { MoviesListService } from './services/movies-list.service';
 import { MoviesDetailService } from './services/movies-detail.service';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MoviesNewService } from './services/movies-new.service';
 
 export const MOVIES_COMPONENTS = [
   MoviesListComponent, MoviesDetailComponent, MoviesNewComponent,
@@ -15,13 +17,15 @@ export const MOVIES_COMPONENTS = [
 ];
 
 export const MOVIES_SERVICES = [
-  MoviesListService, MoviesDetailService
+  MoviesListService, MoviesDetailService, MoviesNewService
 ]
 
 @NgModule({
   declarations: [MOVIES_COMPONENTS],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     MoviesRoutingModule,
     SharedModule
   ],
