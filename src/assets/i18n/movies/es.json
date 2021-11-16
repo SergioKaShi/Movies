@@ -15,5 +15,6 @@
     "title": "Título",
     "fieldRequired": "Campo obligatrio",
     "posterUrl": "Póster (url)",
-    "year": "Año"
+    "year": "Año",
+    "moviesList": "No hay películas disponibles"
 }
