@@ -15,7 +15,7 @@
           class="p-2 pl-5 pr-5 bg-green-400 hover:bg-green-700 font-bold border border-green-500 text-white text-lg rounded-lg"
           (click)="createNewMovie()"
         >
-          {{ movieId ? t('edit') : t('new')}}
+          {{ movieId ? t('save') : t('new')}}
         </button>
       </div>
     </div>
@@ -113,8 +113,10 @@
             formControlName="imdbRating"
             id="puntuacion-new-input"
             type="number"
+            max="10"
             [label]="t('rating')"
             [placeholder]="t('rating')"
+            (onBlurEvent)="onBlurRating($event)"
           >
           </mov-input>
         </div>

@@ -21,9 +21,12 @@ export class MovInputComponent extends ControlValueAccessorConnector implements 
   @Input() items: Array<string> = [];
   @Input() required: boolean = false;
   @Input() hasErrors: boolean = false;
-  @Input() messageError: string = 'Campo inválido'
+  @Input() messageError: string = 'Campo inválido';
+  @Input() min: number = 0;
+  @Input() max: number = 9999;
   @Output() addElementEvent: EventEmitter<string> = new EventEmitter();
   @Output() removeElementEvent: EventEmitter<string> = new EventEmitter();
+  @Output() onBlurEvent: EventEmitter<string> = new EventEmitter();
 
   constructor(injector: Injector) {
     super(injector);
@@ -38,5 +41,9 @@ export class MovInputComponent extends ControlValueAccessorConnector implements 
 
   public removeElement(element: string): void {
     this.removeElementEvent.emit(element);
+  }
+
+  public onBlur(): void {
+    this.onBlurEvent.emit(this.control.value);
   }
 }

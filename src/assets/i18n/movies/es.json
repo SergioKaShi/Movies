@@ -1,7 +1,8 @@
 {
     "newMovie": "Nueva película",
     "back": "Volver",
-    "edit": "Guardar",
+    "edit": "Editar",
+    "save": "Guardar",
     "new": "Crear",
     "delete": "Eliminar",
     "rating": "Puntuación",

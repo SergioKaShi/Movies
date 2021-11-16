@@ -72,9 +72,7 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   private subscribeMovie(): void {
     this.store.getMovie.pipe(this.autoUnsubscribe(), filterNull()).subscribe((movie) => {
       this.movie = { ...movie };
-      console.log('movie: ', this.movie);
       this.newMovieForm.patchValue(this.movie);
-      console.log('newMovieForm: ', this.newMovieForm);
     });
   }
 
@@ -163,6 +161,11 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   public goBack(): void {
     const dataUrlBack = this.movieId ? ['peliculas/detalle', this.movieId] : ['/peliculas'];
     this.router.navigate(dataUrlBack);
+  }
+
+  public onBlurRating(value: string): void {
+    const ratingValue = Number(value) > 10 ? 10 : value;
+    this.newMovieForm.controls.imdbRating.setValue(ratingValue);
   }
 
 }

@@ -47,11 +47,11 @@ export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
     return $data.pipe(
       switchMap(({ id }) => this.moviesDetailService.deleteMovie(id).pipe(
         tap(() => {
-          this.toastrService.showSuccessMessage(translate('success.movieDetail'));
+          this.toastrService.showSuccessMessage(translate('success.movieDetailDelete'));
           this.router.navigate(['peliculas']);
         }),
         catchError(() => {
-          this.toastrService.showErrorMessage(translate('errors.movieDetail'));
+          this.toastrService.showErrorMessage(translate('errors.movieDetailDelete'));
           return EMPTY;
         })
       ))

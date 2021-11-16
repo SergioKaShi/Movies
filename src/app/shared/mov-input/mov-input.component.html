@@ -9,7 +9,10 @@
     [formControl]="control"
     [id]="id" 
     [type]="type"
+    [min]="min" 
+    [max]="max"
     (keydown.enter)="addElement()"
+    (blur)="onBlur()"
   >
   <span
     *ngIf="showIcon"

@@ -11,12 +11,29 @@
       ],
       "year": 2006,
       "duration": 161,
-      "imdbRating": 8.27,
+      "imdbRating": 10,
       "actors": [
-        4,
-        5,
-        6
-      ]
+        {
+          "id": 4,
+          "value": "Marci Noads",
+          "selected": false
+        },
+        {
+          "id": 5,
+          "value": "Jordan Yeskov",
+          "selected": false
+        },
+        {
+          "id": 6,
+          "value": "Hale Bangs",
+          "selected": false
+        }
+      ],
+      "company": {
+        "id": 1,
+        "value": "Jacobson-Dickinson",
+        "selected": false
+      }
     },
     {
       "id": 2,
@@ -28,11 +45,24 @@
       ],
       "year": 1987,
       "duration": 187,
-      "imdbRating": 1.99,
+      "imdbRating": 9.7,
       "actors": [
-        5,
-        6
-      ]
+        {
+          "id": 5,
+          "value": "Jordan Yeskov",
+          "selected": false
+        },
+        {
+          "id": 6,
+          "value": "Hale Bangs",
+          "selected": false
+        }
+      ],
+      "company": {
+        "id": 2,
+        "value": "Quitzon-Erdman",
+        "selected": false
+      }
     },
     {
       "id": 3,
@@ -168,62 +198,6 @@
         9,
         11
       ]
-    },
-    {
-      "id": 11,
-      "title": "titul1",
-      "poster": null,
-      "genre": [
-        "ags"
-      ],
-      "year": 2000,
-      "duration": 200,
-      "imdbRating": 5.6,
-      "actors": [
-        {
-          "id": 1,
-          "value": "Isaak McQuode",
-          "selected": false
-        },
-        {
-          "id": 3,
-          "value": "Lew Meehan",
-          "selected": false
-        }
-      ],
-      "company": {
-        "id": 2,
-        "value": "Quitzon-Erdman",
-        "selected": false
-      }
-    },
-    {
-      "id": 12,
-      "title": "titul12",
-      "poster": null,
-      "genre": [
-        "ags"
-      ],
-      "year": 2000,
-      "duration": 200,
-      "imdbRating": 5.6,
-      "actors": [
-        {
-          "id": 1,
-          "value": "Isaak McQuode",
-          "selected": false
-        },
-        {
-          "id": 3,
-          "value": "Lew Meehan",
-          "selected": false
-        }
-      ],
-      "company": {
-        "id": null,
-        "value": null,
-        "selected": false
-      }
     }
   ],
   "actors": [
