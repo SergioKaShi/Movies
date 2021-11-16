@@ -4,5 +4,19 @@
     "sectionActors": "Actores",
     "sectionCompanies": "Estudios",
     "copyright": "Copyright ©",
-    "createdBy": "Created by Sergio"
+    "createdBy": "Created by Sergio",
+    "errors": {
+        "moviesList": "Ha ocurrido un error al obtener el listado de películas",
+        "movieDetailLoad": "Ha ocurrido un error al obtener los datos de la película",
+        "movieDetailDelete": "Ha ocurrido un error al eliminar la película",
+        "movieNew": "Ha ocurrido un error al crear la película",
+        "movieUpdate": "Ha ocurrido un error al actualizar los datos",
+        "actorsOptions": "Ha ocurrido un error al obtener las opciones de los actores",
+        "companiesOptions": "Ha ocurrido un error al obtener las opciones de los estudios"
+    },
+    "success": {
+        "movieDetailDelete": "Película eliminada correctamente",
+        "movieNew": "Película creada correctamente",
+        "movieUpdate": "Datos actualizados correctamente"
+    }
 }

@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { translate } from '@ngneat/transloco';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable } from 'rxjs';
 import { switchMap, tap, catchError } from 'rxjs/operators';
+import { ToasterMessageService } from 'src/app/services/toaster-message.service';
 import { MovieData } from '../models';
 import { MoviesDetailService } from '../services/movies-detail.service';
 
@@ -17,7 +19,11 @@ const DEFAULT_STATE: MoviesDetailState = {
 @Injectable()
 export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
 
-  constructor(private moviesDetailService: MoviesDetailService, private router: Router) {
+  constructor(
+    private moviesDetailService: MoviesDetailService,
+    private router: Router,
+    private toastrService: ToasterMessageService
+  ) {
     super(DEFAULT_STATE);
   }
 
@@ -29,6 +35,7 @@ export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
       switchMap(({ id }) => this.moviesDetailService.getMovieById(id).pipe(
         tap(movie => this.setMovieDetail(movie)),
         catchError(error => {
+          this.toastrService.showErrorMessage(translate('errors.movieDetailLoad'));
           tap(() => this.setMovieDetail(null));
           return EMPTY;
         })
@@ -39,10 +46,12 @@ export class MoviesDetailStore extends ComponentStore<MoviesDetailState> {
   readonly deleteMovie = this.effect(($data: Observable<{ id: number }>) => {
     return $data.pipe(
       switchMap(({ id }) => this.moviesDetailService.deleteMovie(id).pipe(
-        tap(data => {
+        tap(() => {
+          this.toastrService.showSuccessMessage(translate('success.movieDetail'));
           this.router.navigate(['peliculas']);
         }),
-        catchError(error => {
+        catchError(() => {
+          this.toastrService.showErrorMessage(translate('errors.movieDetail'));
           return EMPTY;
         })
       ))

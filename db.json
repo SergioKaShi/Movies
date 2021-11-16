@@ -168,6 +168,62 @@
         9,
         11
       ]
+    },
+    {
+      "id": 11,
+      "title": "titul1",
+      "poster": null,
+      "genre": [
+        "ags"
+      ],
+      "year": 2000,
+      "duration": 200,
+      "imdbRating": 5.6,
+      "actors": [
+        {
+          "id": 1,
+          "value": "Isaak McQuode",
+          "selected": false
+        },
+        {
+          "id": 3,
+          "value": "Lew Meehan",
+          "selected": false
+        }
+      ],
+      "company": {
+        "id": 2,
+        "value": "Quitzon-Erdman",
+        "selected": false
+      }
+    },
+    {
+      "id": 12,
+      "title": "titul12",
+      "poster": null,
+      "genre": [
+        "ags"
+      ],
+      "year": 2000,
+      "duration": 200,
+      "imdbRating": 5.6,
+      "actors": [
+        {
+          "id": 1,
+          "value": "Isaak McQuode",
+          "selected": false
+        },
+        {
+          "id": 3,
+          "value": "Lew Meehan",
+          "selected": false
+        }
+      ],
+      "company": {
+        "id": null,
+        "value": null,
+        "selected": false
+      }
     }
   ],
   "actors": [

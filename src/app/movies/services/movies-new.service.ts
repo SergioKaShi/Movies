@@ -15,14 +15,22 @@ export class MoviesNewService {
 
   postNewMovie(movie: MovieDataForm): Observable<MovieDataForm> {
     const url = `${this.url}movies`;
+    const movieData = {
+      ...movie,
+      company: new IdValue({ id: movie.companyId, value: movie.companyName })
+    };
 
-    return this.httpClient.post<any>(url, new MovieDataForm().toMovieData(movie)).pipe(map(data => new MovieDataForm(data)));
+    return this.httpClient.post<any>(url, new MovieDataForm().toMovieData(movieData)).pipe(map(data => new MovieDataForm(data)));
   }
 
   putMovie(movie: MovieDataForm): Observable<MovieDataForm> {
     const url = `${this.url}movies/${movie.id}`;
+    const movieData = {
+      ...movie,
+      company: new IdValue({ id: movie.companyId, value: movie.companyName })
+    };
 
-    return this.httpClient.put<any>(url, new MovieDataForm().toMovieData(movie)).pipe(map(data => new MovieDataForm(data)));
+    return this.httpClient.put<any>(url, new MovieDataForm().toMovieData(movieData)).pipe(map(data => new MovieDataForm(data)));
   }
 
   getActorsOptions(): Observable<Array<IdValue>> {

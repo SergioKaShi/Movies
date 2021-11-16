@@ -1,22 +1,23 @@
+import { IdValue } from 'src/app/models';
 import { MovieData } from './movie-data';
 
 export class MovieDataForm extends MovieData {
-    companyId: string;
+    companyId: number;
     companyName: string;
 
-    constructor(item?: MovieData) {
+    constructor(item?: any) {
         super(item);
-        this.companyId = item.company?.id.toString() || null;
-        this.companyName = item.company?.value || null;
+        this.companyId = item?.company?.id || null;
+        this.companyName = item?.company?.value || null;
     }
 
-    public toMovieData(data: MovieDataForm): MovieData {
+    public toMovieData(data: any): MovieData {
         return new MovieData({
             ...data,
             year: Number(data.year),
             duration: Number(data.duration),
             imdbRating: Number(data.imdbRating),
-            company: { id: Number(data.companyId), value: data.companyName }
+            company: new IdValue({ id: Number(data?.companyId) || null, value: data?.companyName || '' })
         })
     }
 }

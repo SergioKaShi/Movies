@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { translate } from '@ngneat/transloco';
 import { ComponentStore } from '@ngrx/component-store';
 import { EMPTY, Observable, of } from 'rxjs';
 import { switchMap, tap, catchError } from 'rxjs/operators';
 import { IdValue } from 'src/app/models';
+import { ToasterMessageService } from 'src/app/services/toaster-message.service';
 import { MovieDataForm } from '../models/movie-data-form';
 import { MoviesDetailService } from '../services/movies-detail.service';
 import { MoviesNewService } from '../services/movies-new.service';
@@ -23,7 +26,12 @@ const DEFAULT_STATE: MoviesNewState = {
 @Injectable()
 export class MoviesNewStore extends ComponentStore<MoviesNewState> {
 
-  constructor(private moviesNewService: MoviesNewService, private moviesDetailService: MoviesDetailService) {
+  constructor(
+    private moviesNewService: MoviesNewService,
+    private moviesDetailService: MoviesDetailService,
+    private toastrService: ToasterMessageService,
+    private router: Router
+  ) {
     super(DEFAULT_STATE);
   }
 
@@ -37,6 +45,7 @@ export class MoviesNewStore extends ComponentStore<MoviesNewState> {
       switchMap(({ id }) => this.moviesDetailService.getMovieById(id).pipe(
         tap(movie => this.setMovie(new MovieDataForm(movie))),
         catchError(error => {
+          this.toastrService.showErrorMessage(translate('errors.movieDetailLoad'));
           tap(() => this.setMovie(null));
           return EMPTY;
         })
@@ -48,8 +57,12 @@ export class MoviesNewStore extends ComponentStore<MoviesNewState> {
     return $data.pipe(
       switchMap(({ movie }) =>
         this.moviesNewService.postNewMovie(movie).pipe(
-          tap(movie => this.setMovie(movie)),
+          tap(movie => {
+            this.toastrService.showSuccessMessage(translate('success.movieNew'));
+            this.router.navigate(['peliculas/detalle', movie.id]);
+          }),
           catchError(error => {
+            this.toastrService.showErrorMessage(translate('errors.movieNew'));
             tap(() => this.setMovie(null));
             return EMPTY;
           })
@@ -62,8 +75,12 @@ export class MoviesNewStore extends ComponentStore<MoviesNewState> {
     return $data.pipe(
       switchMap(({ movie }) =>
         this.moviesNewService.putMovie(movie).pipe(
-          tap(movie => this.setMovie(movie)),
-          catchError(error => {
+          tap(movie => {
+            this.toastrService.showSuccessMessage(translate('success.movieUpdate'));
+            this.setMovie(movie);
+          }),
+          catchError(() => {
+            this.toastrService.showErrorMessage(translate('errors.movieUpdate'));
             tap(() => this.setMovie(null));
             return EMPTY;
           })
@@ -76,7 +93,10 @@ export class MoviesNewStore extends ComponentStore<MoviesNewState> {
     return $origin.pipe(
       switchMap(() => this.moviesNewService.getActorsOptions().pipe(
         tap(actors => this.setActorsOptions(actors)),
-        catchError(__ => of([]))
+        catchError(__ => {
+          this.toastrService.showErrorMessage(translate('errors.actorsOptions'));
+          return of([])
+        })
       ))
     )
   });
@@ -85,7 +105,10 @@ export class MoviesNewStore extends ComponentStore<MoviesNewState> {
     return $origin.pipe(
       switchMap(() => this.moviesNewService.getCompaniesOptions().pipe(
         tap(companies => this.setCompaniesOptions(companies)),
-        catchError(__ => of([]))
+        catchError(__ => {
+          this.toastrService.showErrorMessage(translate('errors.companiesOptions'));
+          return of([])
+        })
       ))
     )
   });

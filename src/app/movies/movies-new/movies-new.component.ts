@@ -72,12 +72,14 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
   private subscribeMovie(): void {
     this.store.getMovie.pipe(this.autoUnsubscribe(), filterNull()).subscribe((movie) => {
       this.movie = { ...movie };
+      console.log('movie: ', this.movie);
       this.newMovieForm.patchValue(this.movie);
+      console.log('newMovieForm: ', this.newMovieForm);
     });
   }
 
   private subscribeActorsOptions(): void {
-    const movie = this.store.getMovie.pipe(this.autoUnsubscribe(), filterNull());
+    const movie = this.store.getMovie.pipe(this.autoUnsubscribe());
     const actors = this.store.getActorsOptions.pipe(this.autoUnsubscribe());
 
     combineLatest([movie, actors]).subscribe(([movie, actorsOptions]) => {
@@ -106,6 +108,14 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
       const companySelected = this.companiesOptions.find(company => company.id.toString() === data);
       this.newMovieForm.controls.companyName.setValue(companySelected?.value || null);
     });
+  }
+
+  private createUpdateMovie(): void {
+    if (this.movieId) {
+      this.store.updateMovie({ movie: { ...this.newMovieForm.getRawValue(), id: this.movieId } });
+    } else {
+      this.store.createMovie({ movie: this.newMovieForm.getRawValue() });
+    }
   }
 
   public addGenreItem(item: string): void {
@@ -146,10 +156,8 @@ export class MoviesNewComponent extends BaseUnsubscribeComponent implements OnIn
 
   public createNewMovie(): void {
     this.formErrors = this.newMovieForm.invalid;
-
-    if (this.newMovieForm.valid) {
-      this.store.createMovie({ movie: this.newMovieForm.getRawValue() });
-    }
+    if (this.newMovieForm.invalid) { return; }
+    this.createUpdateMovie();
   }
 
   public goBack(): void {

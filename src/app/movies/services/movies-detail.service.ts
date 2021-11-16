@@ -34,7 +34,11 @@ export class MoviesDetailService {
                         const actorFound = actors.find((actor: any) => actor.id === actorId);
                         return actorFound ? new IdValue({ ...actorFound, value: `${actorFound.first_name} ${actorFound.last_name}` }) : null
                     }),
-                    company: companyFound ? new IdValue({ id: companyFound.id, value: companyFound.name }) : null
+                    company: companyFound
+                        ? new IdValue({ id: companyFound.id, value: companyFound.name })
+                        : movie?.company?.id
+                            ? movie.company
+                            : null
                 });
             })
         );
